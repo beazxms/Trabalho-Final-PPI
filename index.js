@@ -189,7 +189,7 @@ app.get('/livro', (req, res) => {
     <input class="form-control mb-2" name="autor" placeholder="Ex: Machado de Assis">
 
     <label>ISBN</label>
-    <input class="form-control mb-2" name="isbn" placeholder="Somente números">
+    <input class="form-control mb-2" name="isbn" placeholder="Ex: 9788535914849">
 
     <button class="btn btn-custom w-100">Salvar</button>
     </form>
@@ -231,10 +231,10 @@ app.get('/leitor', (req, res) => {
     <input class="form-control mb-2" name="nome" placeholder="Ex: Maria Silva">
 
     <label>CPF</label>
-    <input class="form-control mb-2" name="cpf" placeholder="11 números">
+    <input class="form-control mb-2" name="cpf" placeholder="000.000.000-00">
 
     <label>Telefone</label>
-    <input class="form-control mb-2" name="tel" placeholder="Somente números">
+    <input class="form-control mb-2" name="tel" placeholder="(00) 00000-0000">
 
     <label>Data empréstimo</label>
     <input class="form-control mb-2" type="date" name="emp">
