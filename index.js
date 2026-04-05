@@ -75,7 +75,7 @@ function pagina(titulo, conteudo, ultimo = "") {
     <div class="container-box">
 
     <div class="top-bar">
-        Último acesso: ${ultimo}
+        Último acesso: ${ultimo || "Primeira vez"}
     </div>
 
     ${conteudo}
@@ -92,8 +92,13 @@ app.get('/', (req, res) => {
     <h1>Login</h1>
 
     <form method="POST" action="/login">
-    <input class="form-control mb-2" name="user" placeholder="Usuário">
-    <input class="form-control mb-2" type="password" name="senha" placeholder="Senha">
+
+    <label>Usuário</label>
+    <input class="form-control mb-2" name="user" placeholder="Ex: admin">
+
+    <label>Senha</label>
+    <input class="form-control mb-2" type="password" name="senha" placeholder="Ex: 123">
+
     <button class="btn btn-custom w-100">Entrar</button>
     </form>
     `));
@@ -107,7 +112,9 @@ app.post('/login', (req, res) => {
     <h1>Login</h1>
 
     <form method="POST" action="/login">
-    <input class="form-control mb-2" name="user" placeholder="Usuário" value="${user || ""}">
+
+    <label>Usuário</label>
+    <input class="form-control mb-2" name="user" value="${user || ""}">
     `;
 
     if (!user) {
@@ -115,7 +122,8 @@ app.post('/login', (req, res) => {
     }
 
     html += `
-    <input class="form-control mb-2" type="password" name="senha" placeholder="Senha">
+    <label>Senha</label>
+    <input class="form-control mb-2" type="password" name="senha">
     `;
 
     if (!senha) {
@@ -165,7 +173,7 @@ app.get('/livro', (req, res) => {
 
     let lista = livros.map(l => `
     <div class="alert alert-light">
-        <b>${l.titulo}</b> - ${l.autor}
+        <b>${l.titulo}</b> - ${l.autor} ISBN: ${l.isbn}
     </div>
     `).join('');
 
@@ -173,9 +181,16 @@ app.get('/livro', (req, res) => {
     <h1>Novo Livro</h1>
 
     <form method="POST">
-    <input class="form-control mb-2" name="titulo" placeholder="Título">
-    <input class="form-control mb-2" name="autor" placeholder="Autor">
-    <input class="form-control mb-2" name="isbn" placeholder="ISBN">
+
+    <label>Título</label>
+    <input class="form-control mb-2" name="titulo" placeholder="Ex: Dom Casmurro">
+
+    <label>Autor</label>
+    <input class="form-control mb-2" name="autor" placeholder="Ex: Machado de Assis">
+
+    <label>ISBN</label>
+    <input class="form-control mb-2" name="isbn" placeholder="Somente números">
+
     <button class="btn btn-custom w-100">Salvar</button>
     </form>
 
@@ -189,9 +204,11 @@ app.post('/livro', (req, res) => {
 
     const { titulo, autor, isbn } = req.body;
 
-    if (!titulo || !autor || !isbn) {
+    if (!titulo || !autor || !isbn || !/^\d+$/.test(isbn)) {
         return res.send(pagina("Erro", `
-        <div class="alert alert-danger">Preencha todos os campos!</div>
+        <div class="alert alert-danger">
+        Preencha todos os campos e o ISBN deve conter apenas números!
+        </div>
         <a href="javascript:history.back()" class="btn btn-outline-secondary w-100 mt-2">Voltar</a>
         `));
     }
@@ -209,9 +226,15 @@ app.get('/leitor', (req, res) => {
     <h1>Novo Leitor</h1>
 
     <form method="POST">
-    <input class="form-control mb-2" name="nome" placeholder="Nome">
-    <input class="form-control mb-2" name="cpf" placeholder="CPF">
-    <input class="form-control mb-2" name="tel" placeholder="Telefone">
+
+    <label>Nome</label>
+    <input class="form-control mb-2" name="nome" placeholder="Ex: Maria Silva">
+
+    <label>CPF</label>
+    <input class="form-control mb-2" name="cpf" placeholder="11 números">
+
+    <label>Telefone</label>
+    <input class="form-control mb-2" name="tel" placeholder="Somente números">
 
     <label>Data empréstimo</label>
     <input class="form-control mb-2" type="date" name="emp">
@@ -219,6 +242,7 @@ app.get('/leitor', (req, res) => {
     <label>Data devolução</label>
     <input class="form-control mb-2" type="date" name="dev">
 
+    <label>Livro</label>
     <select class="form-control mb-2" name="livro">
     <option value="">Selecione um livro</option>
     ${options}
@@ -235,9 +259,11 @@ app.post('/leitor', (req, res) => {
 
     const { nome, cpf, tel, emp, dev, livro } = req.body;
 
-    if (!nome || !cpf || !tel || !emp || !dev || !livro) {
+    if (!nome || !cpf || !tel || !emp || !dev || !livro || !/^\d{11}$/.test(cpf) || !/^\d+$/.test(tel)) {
         return res.send(pagina("Erro", `
-        <div class="alert alert-danger">Preencha todos os campos!</div>
+        <div class="alert alert-danger">
+        Preencha corretamente todos os campos!
+        </div>
         <a href="javascript:history.back()" class="btn btn-outline-secondary w-100 mt-2">Voltar</a>
         `));
     }
