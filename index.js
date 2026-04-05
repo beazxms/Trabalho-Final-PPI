@@ -177,7 +177,7 @@ app.get('/livro', (req, res) => {
 
     let lista = livros.map(l => `
     <div class="alert alert-secondary">
-    ${l.titulo} - ${l.autor}
+    ${l.titulo} - ${l.autor} ISBN: ${l.isbn}
     </div>
     `).join('');
 
@@ -367,3 +367,4 @@ app.get('/logout', (req, res) => {
 app.listen(porta, host, () => {
     console.log("Rodando em http://localhost:3000");
 });
+//fiz css por puro fru-fru mesmo, queria deixar a aplicação mais bonitinha :)
