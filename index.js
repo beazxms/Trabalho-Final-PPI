@@ -75,7 +75,7 @@ function pagina(titulo, conteudo, ultimo = "") {
     <div class="container-box">
 
     <div class="top-bar">
-        Último acesso: ${ultimo || "Primeira vez"}
+        Último acesso: ${ultimo}
     </div>
 
     ${conteudo}
