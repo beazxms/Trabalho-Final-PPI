@@ -28,14 +28,16 @@ function pagina(titulo, conteudo, mostrarUltimo = false, ultimo = "") {
     <title>${titulo}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+/*fiz css por puro fru-fru mesmo, queria deixar a aplicação mais bonitinha :) */
 <style>
+/* Coloquei esse gradiente pra dar um ar mais moderno pro login */
 body {
     background: linear-gradient(135deg, #F0F3FA, #B1C9EF, #638ECB);
     min-height: 100vh;
     font-family: Arial;
 }
 
+/* Usei esse box-shadow sólido (estilo Neobrutalista) que vi num post de UI */
 .container-box {
     background: white;
     padding: 25px;
@@ -367,4 +369,3 @@ app.get('/logout', (req, res) => {
 app.listen(porta, host, () => {
     console.log("Rodando em http://localhost:3000");
 });
-//fiz css por puro fru-fru mesmo, queria deixar a aplicação mais bonitinha :)
