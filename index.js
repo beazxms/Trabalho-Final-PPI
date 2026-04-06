@@ -28,9 +28,9 @@ function pagina(titulo, conteudo, mostrarUltimo = false, ultimo = "") {
         <title>${titulo}</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    /*fiz css por puro fru-fru mesmo, queria deixar a aplicação mais bonitinha :) */
+
     <style>
-    /* Coloquei esse gradiente pra dar um ar mais moderno pro login */
+    /* Coloquei esse gradiente pra deixar mais bonitinho e menos estático */
     body {
         background: linear-gradient(135deg, #F0F3FA, #B1C9EF, #638ECB);
         min-height: 100vh;
